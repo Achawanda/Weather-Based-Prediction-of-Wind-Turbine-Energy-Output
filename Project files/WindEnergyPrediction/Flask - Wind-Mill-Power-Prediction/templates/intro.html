@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Wind Energy Prediction</title>
+
+<style>
+body{
+    margin:0;
+    font-family: Arial, Helvetica, sans-serif;
+    background:#f5f5f5;
+}
+
+/* HEADER */
+.header{
+    background:#6b4b3e;
+    color:white;
+    padding:20px;
+    text-align:center;
+    font-size:28px;
+    font-weight:bold;
+}
+
+/* HERO SECTION */
+.hero{
+    background:#e6c89c;
+    padding:40px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+}
+
+/* LEFT IMAGE */
+.hero img{
+    width:280px;
+    margin-right:40px;
+}
+
+/* RIGHT TEXT */
+.content{
+    max-width:500px;
+}
+
+.content p{
+    font-size:14px;
+    line-height:1.6;
+    color:#333;
+}
+
+/* BUTTON */
+.predict-btn{
+    margin-top:20px;
+    padding:12px 20px;
+    background:#6b4b3e;
+    color:white;
+    border:none;
+    cursor:pointer;
+}
+
+/* FORM POPUP */
+.form-box{
+    margin-top:30px;
+    background:white;
+    padding:20px;
+    border-radius:8px;
+    display:none;
+}
+
+input{
+    width:90%;
+    padding:10px;
+    margin:8px;
+}
+
+.submit-btn{
+    background:#007BFF;
+    color:white;
+    border:none;
+    padding:10px;
+    cursor:pointer;
+}
+</style>
+</head>
+
+<body>
+
+<div class="header">
+Wind Turbine Energy Prediction Based on Weather Conditions
+</div>
+
+<div class="hero">
+
+    <!-- IMAGE -->
+    <img src="{{ url_for('static', filename='wind.png') }}">
+
+    <!-- TEXT -->
+    <div class="content">
+        <p>
+        Renewable energy, such as wind and solar energy, plays an increasing role in the
+        supply of energy worldwide. This trend will continue because global energy demand
+        is increasing and the use of nuclear power and traditional energy such as coal
+        and oil is unsafe and leads to large amounts of CO2 emissions.
+        </p>
+
+        <p>
+        However, levels of production of wind energy are hard to predict as they rely on
+        unpredictable weather conditions present at the wind farm. In particular, wind
+        speed is crucial for energy production based on wind.
+        </p>
+
+        <button class="predict-btn" onclick="showForm()">WANT TO PREDICT THE ENERGY?</button>
+
+        <!-- FORM -->
+        <div class="form-box" id="formBox">
+            <form action="/predict" method="post">
+                <input type="text" name="temperature" placeholder="Temperature" required>
+                <input type="text" name="pressure" placeholder="Pressure" required>
+                <input type="text" name="humidity" placeholder="Humidity" required>
+                <input type="text" name="wind_speed" placeholder="Wind Speed" required>
+                <br>
+                <button class="submit-btn" type="submit">Predict</button>
+            </form>
+
+            <h3>{{ prediction_text }}</h3>
+        </div>
+
+    </div>
+</div>
+
+<script>
+function showForm(){
+    document.getElementById("formBox").style.display="block";
+}
+</script>
+
+</body>
+</html>

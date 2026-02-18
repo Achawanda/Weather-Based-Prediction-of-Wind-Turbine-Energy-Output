@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Wind Energy Prediction</title>
+
+<style>
+body{
+    margin:0;
+    font-family: Arial;
+    background:#e6c89c;
+}
+
+/* HEADER */
+.header{
+    background:#6b4b3e;
+    color:white;
+    padding:20px;
+    text-align:center;
+    font-size:26px;
+}
+
+/* MAIN LAYOUT */
+.container{
+    display:flex;
+    justify-content:space-around;
+    padding:40px;
+}
+
+/* LEFT WEATHER */
+.weather-box{
+    width:40%;
+}
+
+.weather-box input,
+.weather-box button{
+    padding:10px;
+    margin:10px 0;
+    width:80%;
+}
+
+.weather-result{
+    margin-top:20px;
+}
+
+/* RIGHT PREDICTION */
+.predict-box{
+    width:40%;
+}
+
+.predict-box input{
+    display:block;
+    width:80%;
+    padding:10px;
+    margin:10px 0;
+}
+
+.predict-btn{
+    padding:10px 20px;
+    background:#6b4b3e;
+    color:white;
+    border:none;
+    cursor:pointer;
+}
+
+/* RESULT TEXT */
+.result{
+    margin-top:20px;
+    font-size:18px;
+    font-weight:bold;
+}
+</style>
+</head>
+
+<body>
+
+<div class="header">
+Wind Turbine Energy Prediction Based on Weather Conditions
+</div>
+
+<div class="container">
+
+    <!-- LEFT SIDE -->
+    <div class="weather-box">
+        <h3>Give your city name to know the weather conditions..</h3>
+
+        <form action="/windapi" method="post">
+            <input type="text" name="city" placeholder="Enter city">
+            <button type="submit">CHECK THE WEATHER CONDITIONS</button>
+        </form>
+
+        <div class="weather-result">
+            <h3>The weather conditions of the city are</h3>
+            <p>Temperature: {{ temp }}</p>
+            <p>Humidity: {{ humid }}</p>
+            <p>Pressure: {{ pressure }}</p>
+            <p>Wind Speed: {{ speed }}</p>
+
+        </div>
+    </div>
+
+    <!-- RIGHT SIDE -->
+    <div class="predict-box">
+        <h3>Predict the Wind Energy!!</h3>
+
+        <form action="/y_predict" method="POST">
+
+            <input type="text" name="wind_speed" placeholder="Wind Speed" required>
+            <input type="text" name="temperature" placeholder="Temperature" required>
+            <input type="text" name="humidity" placeholder="Humidity" required>
+            <input type="text" name="pressure" placeholder="Pressure" required>
+
+            <button type="submit">Predict</button>
+        </form>
+
+            <h2>{{ prediction_text }}</h2>
+
+    </div>
+
+</div>
+
+</body>
+</html>
